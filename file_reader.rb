@@ -9,5 +9,13 @@ else
   exit
 end
 
-file = File.read(path)
-puts file
+File.open(path) do |file|
+  file.readlines.each do |line|
+    title = line.split('|')[1]
+    rating = line.split('|')[7]
+
+    if title.include? 'Max'
+      puts "#{title} #{rating}"
+    end
+  end
+end
