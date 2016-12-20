@@ -14,8 +14,6 @@ File.open(path) do |file|
     title = line.split('|')[1]
     rating = line.split('|')[7]
 
-    if title.include? 'Max'
-      puts "#{title} #{rating}"
-    end
+    puts "#{title} <#{'*' * rating[2].to_i}>"
   end
 end
