@@ -10,6 +10,10 @@ path = File.dirname(__FILE__) + ARGV.join
 if File.exist? path
   puts 'file exist now U can process the file'
 else
+  path = File.dirname(__FILE__) + './lesson2/movies.txt'
+end
+
+if !File.exist? path
   puts 'file not found'
   exit
 end
