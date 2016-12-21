@@ -1,29 +1,14 @@
 #encoding: UTF-8
 
-if ARGV.empty?
-  puts "U didn't write anything as argument"
-  exit
+file_path = File.dirname(__FILE__) + "./lesson2/#{ARGV.join}"
+
+if !File.exist?(file_path) || ARGV.empty?
+  file_path = File.dirname(__FILE__) + './lesson2/movies.txt'
 end
 
-path = File.dirname(__FILE__) + ARGV.join
-
-if File.exist? path
-  puts 'file exist now U can process the file'
-else
-  path = File.dirname(__FILE__) + './lesson2/movies.txt'
-end
-
-if !File.exist? path
-  puts 'file not found'
-  exit
-end
-
-File.open(path) do |file|
-
+File.open(file_path) do |file|
   file.readlines.each do |line|
-    title = line.split('|')[1]
-    rating = line.split('|')[7]
-
-    puts "#{title} <#{'*' * rating[2].to_i}>"
+    info_movie = line.split('|')
+    puts "#{info_movie[1]} <#{'*' * info_movie[7][2].to_i}>"
   end
 end
