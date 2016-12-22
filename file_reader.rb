@@ -1,24 +1,16 @@
 #encoding: UTF-8
 
-if !ARGV.empty?
-  file_path = File.dirname(__FILE__) + "./lesson2/#{ARGV.join}"
-else
-  file_path = File.dirname(__FILE__) + "./lesson2/movies.txt"
+file_path = File.dirname(__FILE__) + "./lesson2/" + (ARGV.first || '/movies.txt')
+
+if !File.exist? file_path
+  puts "file not found"
+  exit
 end
 
-if File.exist? file_path
-  File.open(file_path) do |file|
-    file.readlines.each do |line|
-      info_movie = line.split('|')
-      rating = info_movie[7]
-            
-      if rating[1].to_i < 9
-        print "#{info_movie[1]} <#{'*' * rating[2].to_i}> "
-      else
-        print "#{info_movie[1]} <#{'*' * rating[2].to_i * 10}> "
-      end
-    end
+File.open(file_path) do |file|
+  file.readlines.each do |line|
+    title, rating = line.split('|').values_at(1, 7)
+    stars = (rating.to_f - 8).round(1) * 10
+    print "#{title} #{'*' * stars} "
   end
-else
-  puts "file not found"
 end
