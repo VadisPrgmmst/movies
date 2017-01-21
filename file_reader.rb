@@ -11,6 +11,5 @@ file = File.new path
 
 keys = %i(link title year country release genre time rating director stars)
 
-file.readlines.map{|line| keys.zip(line.split('|')).to_h}
-
+movies = file.readlines.map{|line| keys.zip(line.split('|')).to_h}
 file.close
