@@ -1,6 +1,7 @@
 #encoding: UTF-8
 require 'csv'
 require 'ostruct'
+require 'date'
 
 def show_movies(movies)
   movies.map{ |m|
@@ -32,3 +33,9 @@ puts movies.map(&:director).uniq.sort_by{|m| m.split(' ').last}
 
 puts
 puts movies.count{|m| m.country != 'USA'}
+
+puts
+movies.select{|m| m.release.size.eql?(10)}.
+  sort_by{|m| Date.parse(m.release).mon}.
+  map{|m|Date.parse(m.release).strftime("%B")}.
+  group_by(&:itself).each{|k,v| puts "#{k}: #{v.size}"}
