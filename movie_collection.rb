@@ -14,8 +14,8 @@ class MovieCollection
   end
 
 
-  def filter hash
-    @collection.select{|m| m.send(hash.keys.first).include? hash[:key]}
+  def filter option
+  	@collection.find_all{|m| m.match_filter?(option.keys.first, option.values.first)}
   end
 
 
@@ -31,5 +31,5 @@ class MovieCollection
   def init_collection
     File.readlines(@file).map{|l| Movie.new(l.split('|'), self)}
   end
-
+  
 end

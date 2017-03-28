@@ -7,26 +7,31 @@ abort "Collection not found" unless File.exist?('./movies.txt')
 
 movies = MovieCollection.new('./movies.txt')
 
-puts movies.all
+#p movies.all.last(5)
 
-puts 
-puts movies.sort_by(:date)
+#puts 
+#puts movies.sort_by(:date)
 
-puts 
-puts movies.filter(genre: 'Comedy')
-
+#puts
+puts movies.filter(title: "It's a Wonderful Life")
 puts
-puts movies.stats(:director)
-
+puts movies.filter(title: /It's a Wonderful Life/)
 puts
-puts movies.all.first.actors
-
+puts movies.filter(year: 2000..2001)
 puts
-begin
-  puts movies.all.first.has_genre?('Tragedy')
-rescue Exception => e
-  puts e
-end
+puts movies.filter(actors: 'Bob Gunton')
 
 
 
+#puts
+#puts movies.stats(:director)
+
+#puts
+#puts movies.all.first.actors
+
+#puts
+#begin
+  #puts movies.all.first.has_genre?('Tragedy')
+#rescue Exception => e
+  #puts e
+#end
