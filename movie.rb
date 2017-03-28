@@ -2,7 +2,7 @@ require_relative 'movie_collection'
 
 class Movie
 
-  attr_reader :link, :title, :year, :date, :director
+  attr_reader :link, :title, :date, :director
 
   def initialize(movie, collection)
     @link,
@@ -30,12 +30,16 @@ class Movie
     @time.to_i
   end
 
+  def year
+    @year.to_i
+  end
+
   def rating
     @rating.to_f
   end
 
   def actors
-    @actors.split(',')
+    @actors.chomp.split(',')
   end
 
   def has_genre? gen
@@ -49,6 +53,12 @@ class Movie
 
   def inspect
     "<#{self.class}: \"#{title}\">"
+  end
+
+  def match_filter?(filter, pattern)
+    value = self.send(filter)
+
+    value.is_a?(Array) ? value.include?(pattern) : (pattern === value)
   end
 
 end
