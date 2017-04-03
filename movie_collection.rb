@@ -13,19 +13,19 @@ class MovieCollection
     @collection.sort_by{|m| m.send method}
   end
 
-
   def filter option
-  	@collection.find_all{|m| m.match_filter?(option.keys.first, option.values.first)}
+  	option.reduce(@collection) do |result,(filter,pattern)| 
+  		result.find_all{|m| m.match_filter?(filter,pattern)}
+  	end
   end
 
-
   def stats method
-    @collection.map(&(method)).group_by(&:itself).
+    @collection.flat_map(& method).sort.group_by(&:itself).
       map{|k,v| [k,v.length]}.to_h
   end
 
   def available_genres
-  	@collection.map(&:genre).flatten.uniq
+  	@collection.flat_map(&:genre).uniq
   end
 
   def init_collection

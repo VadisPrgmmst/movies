@@ -13,18 +13,19 @@ movies = MovieCollection.new('./movies.txt')
 #puts movies.sort_by(:date)
 
 #puts
-puts movies.filter(title: "It's a Wonderful Life")
-puts
-puts movies.filter(title: /It's a Wonderful Life/)
-puts
-puts movies.filter(year: 2000..2001)
-puts
-puts movies.filter(actors: 'Bob Gunton')
-
-
+#puts movies.filter(title: "It's a Wonderful Life")
 
 #puts
-#puts movies.stats(:director)
+#puts movies.filter(title: /It's a Wonderful Life/)
+
+puts
+puts movies.filter(year: 2000..2001, genre: 'Comedy')
+
+#puts
+#puts movies.filter(actors: 'Bob Gunton')
+
+puts
+puts movies.stats(:director)
 
 #puts
 #puts movies.all.first.actors

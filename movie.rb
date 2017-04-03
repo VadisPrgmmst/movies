@@ -14,7 +14,7 @@ class Movie
     @time,
     @rating,
     @director,
-    @actors = movie.values_at(0..-1)
+    @actors = movie
     @collection = collection
   end
 
